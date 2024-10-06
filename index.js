@@ -30,7 +30,8 @@ router.get("/home", (req, res) => {
 */
 router.get("/profile", (req, res) => {
   fs.readFile("user.json", "utf8", (err, data) => {
-    res.end(JSON.stringify(data));
+    res.writeHead(200, { "Content-Type": "application/json;charset=utf-8" });
+    res.end(data);
   });
 });
 
@@ -58,7 +59,10 @@ router.post("/login", (req, res) => {
     const userData = JSON.parse(data);
     const { username, password } = req.body;
     if (!username || !password) {
-      res.json({ status: false, message: "Username or password is missing." });
+      return res.json({
+        status: false,
+        message: "Username or password is missing.",
+      });
     }
 
     if (username === userData.username && password === userData.password) {
