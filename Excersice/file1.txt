@@ -1,0 +1,354 @@
+/*
+
+*** This is very important part of building APIs and enables applications 
+is perform CRUD (Create, Read, Update, Delete) operations. ***
+
+npm install express 
+
+You should install the following important modules along with express -
+• body-parser : This is a node.js middleware for handling JSON, Raw, Text and URL encoded form data.
+• cookie-parser : Parse Cookie header and populate req.cookies with an object keyed by the cookie
+                names.
+• multer : This is a node.js middleware for handling multipart/form-data.
+• nodemon : is a tool that helps develop Node.js based applications 
+         by automatically restarting the node application when file changes 
+                         in the directory are detected
+• Installation
+$ npm install body-parser --save
+$ npm install cookie-parser --save
+$ npm install multer --save 
+$ npm install nodemon 
+
+*/
+
+// /* Running a simple web server in Express JS:
+//     - require('express'): Imports the Express module.
+//     - const app = express(): Creates an Express application instance, which serves as the foundation 
+                                       //for building your web application.
+//              - app.listen(port, callback): Starts the server and listens for requests on the specified port.
+//              - process.env.PORT: Checks for an environment variable named PORT that might be set to a specific port number.
+//              - callback function: An optional function that is called when the server starts successfully. */
+
+const express = require('express');
+const app = express(); //Use app object to define different routes of your application.
+
+// ////-----------------------------------------------------------------------------------------------
+// /* Adding Route for Handling request in Express JS:
+//     - Express provides methods to define routes (get, post, etc), which map specific URL paths to corresponding 
+//         server-side functions (handlers) that handle incoming requests.
+//       These methods come in different flavors for various HTTP methods (GET, POST, PUT, DELETE, etc.):
+//     - app.get(path, fun handler): Defines a route that handles GET requests to the specified path.
+//         The handler function is called with two arguments:
+//          - req: The request object containing information sent by the client (e.g., headers, parameters, body).
+//          - res: The response object used to send a response back to the client (e.g., send data, set status codes).
+//     - You can use other HTTP methods like app.post, app.put, app.delete, etc., following the same syntax. */
+
+
+    // // Use environment variable or default to port 3000
+    // const port = process.env.PORT || 3000; 
+    // let data='<h3>COMP3123:Hello from my Express app!</h3>'
+
+    // app.get('/', (req, res) => {
+    //   // Code to handle GET requests to the root path ('/')
+    //   //res.send('Hello from my Express app!');
+    //   res.send(data);
+    // });
+    // app.listen(port, () => {
+    //   console.log(`Server listening on port ${port}`);
+    //   console.log("http://127.0.0.1:3000/"); 
+    // });
+
+////-----------------------------------------------------------------------------------------------
+// /* Adding Path Parameters to Routes in Express JS:
+//     You can capture dynamic values from URLs using parameters:
+
+//     - :id is a placeholder for a dynamic value.
+//     - req.params: An object containing the captured parameter values.
+//  */
+
+// const port = process.env.PORT || 3000; // Use environment variable or default to port 3000
+
+// //// copy this URL to your browser 
+// ////http://127.0.0.1:3000/usersID/123 /// output User with ID: 123
+// app.get('/usersID/:id', (req, res) => {
+//   const userId = req.params.id; // Parameter value
+//   res.send(`User with ID: ${userId}`);
+// });
+// //// copy this URL to your browser 
+// ////http://127.0.0.1:3000/usersName/Ali /// output User with Name: Ali
+// app.get('/usersName/:name', (req, res) => {
+//     const userName = req.params.name;  
+//     res.json(`User with Name: ${userName}`); //json similer to send but in json format 
+//   });
+// // Add Multiple Parameters  
+// // copy this URL to your browser 
+// //http://127.0.0.1:3000/usersNameID/Ali/123  /// output User with Name: Ali , and ID: 123
+// app.get('/usersNameID/:name/:id', (req, res) => {
+//     const userId = req.params.id;
+//     const userName = req.params.name; 
+//     res.json(`User with Name: ${userName} , and ID: ${userId}`); 
+// });
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
+
+////-------------------------------------------------------------------------------------------
+/* Adding Querystring Parameters to Routes in Express JS: 
+  http://127.0.0.1:3000/users?first_name=Mohammed&last_name=Tawalbeh
+  Query starts '?', this the query '?first_name=Mohammed&last_name=Tawalbeh' 
+
+*/
+
+// const port = process.env.PORT || 3000; // Use environment variable or default to port 3000
+
+// // copy this URL to your browser 
+// //http://127.0.0.1:3000/usersID?id=123 /// output User with ID: 123
+// app.get('/usersID', (req, res) => {
+//   const userId = req.query.id; // Parameter value
+//   res.send(`User with ID: ${userId}`);
+// });
+// // copy this URL to your browser 
+// //http://127.0.0.1:3000/usersName?name=Ali /// output User with Name: Ali
+// app.get('/usersName', (req, res) => {
+//     const userName = req.query.name; 
+//     res.json(`User with Name: ${userName}`); 
+//   });
+// // Add Multiple Parameters  
+// // copy this URL to your browser 
+// //http://127.0.0.1:3000/usersNameID?name=Ali&id=123  /// output User with Name: Ali , and ID: 123
+// app.get('/usersNameID', (req, res) => {
+//     const userId = req.query.id;
+//     const userName = req.query.name; 
+//     res.json(`User with Name: ${userName} , and ID: ${userId}`); 
+// });
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
+
+////-------------------------------------------------------------------------------------------
+// /* POST requests are used to submit data to a server (there is no actual server here so no results display)
+// while GET queries are used to get data from a server. */
+// const port = process.env.PORT || 3000; // Use environment variable or default to port 3000
+
+// // Parse JSON bodies for POST requests
+// app.use(express.json());
+
+// //// Add Multiple Parameters  
+// //// copy this URL to your browser 
+// ////http://127.0.0.1:3000/usersNameID/Ali/123  /// output User with Name: Ali , and ID: 123
+// app.post('/usersNameID/:name/:id', (req, res) => {
+//     const userId = req.params.id;
+//     const userName = req.params.name; 
+//     res.json(`User with Name: ${userName} , and ID: ${userId}`); 
+// });
+// //// Add Multiple Parameters  
+// //// copy this URL to your browser 
+// ////http://127.0.0.1:3000/usersNameID?name=Ali&id=123  /// output User with Name: Ali , and ID: 123
+// app.post('/usersNameID', (req, res) => {
+//     const userId = req.query.id;
+//     const userName = req.query.name; 
+//     res.json(`User with Name: ${userName} , and ID: ${userId}`); 
+// });
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
+
+////-------------------------------------------------------------------------------------------
+
+/* GET request from html file Using Querystring to send values */
+
+//Use the express.static built-in middleware function
+//To serve static files such as images, CSS files, and JavaScript, files if there are!!
+app.use(express.static('public'));
+
+/*creat index.html file with Form has get method, it has two inputs and the name of first is 
+ "first_name" and "last_name" 
+*/ 
+
+// // app.get('/index.html', function (req, res) {
+// // /* The res.sendFile() function transfers the file at the given path 
+// // (__dirname here is optional becuase the file in the same package) and 
+// // it sets the Content-Type response HTTP header field based on the filename extension.*/    
+// // res.sendFile( __dirname + "/" + "index.html" );
+// // })
+// //// http://127.0.0.1:8081/process_get?first_name=Mohammed&last_name=Tawalbeh
+// app.get('/process_get', function (req, res) {
+//         // Prepare output in JSON format 
+//         response = {
+//         first_name:req.query.first_name, // first_name is the ID in html file  
+//         last_name:req.query.last_name  // last_name is the ID in html file 
+//         };
+// console.log(response); // just print in terminal 
+// res.json(response); // send as JSON
+// ////OR
+// ////res.end(JSON.stringify(response)); // send as JSON
+// });
+
+// app.listen(3000, function () {
+// console.log("http://127.0.0.1:3000/ is running");
+// });
+//// after run the 'index.js' go to 'index.html' fill the form and submit it.
+
+// // ////-------------------------------------------------------------------------------------------
+
+// /* Modularizing Routes with Express Router: 
+// As your application grows, managing routes in a single file can become cumbersome(troublesome). 
+// Express Router allows you to create modular route handlers:
+
+// Create a separate file for routes (e.g., routes.js): 
+// and add the follwing code
+
+// const express = require('express');
+// const router = express.Router();
+
+// router.get('/', (req, res) => {
+//     res.send('Hello from Express routes!');
+// });
+
+// router.get('/users/:id', (req, res) => {
+//     const userId = req.params.id; // Access the parameter value
+//     res.send(`User with ID: ${userId} from routes`);
+// });
+
+// module.exports = router;
+
+// Importing and using the router in your main app (index.js):
+// */
+
+// // Use environment variable or default to port 3000
+// const port = process.env.PORT || 3000;
+
+// // Import the router
+// const routes = require('./routes.js');
+
+// // Use the router for all paths starting with '/'
+// app.use('/', routes);
+// app.listen(port, () => {
+//     console.log(`Server listening on port ${port}`);
+// });
+
+// console.log("http://127.0.0.1:3000/");
+// console.log("http://127.0.0.1:3000/users/123");
+
+// ////---------------------------------------------------------
+/* Using router.param() Method
+ The parameters of router.param() are a name and function. 
+Where the name is the actual name of the parameter and the function is the callback function. 
+Basically, the router.param() function triggers the callback function whenever the user routes to the parameter. 
+This callback function will be called only a single time in the request-response cycle, even if the user routes to the parameter multiple times.
+
+Following are the parameters of the callback function −
+
+req – the request object
+
+res – the response object
+
+next -- the next middleware
+    Next. js' middleware allows you to create functions that execute after a user's request is made 
+    and before the request is completed 
+
+name – value of the name parameter
+
+Create a separate file for routes (e.g., routes2.js): 
+and add the follwing code:
+
+// Importing the express module
+const express = require("express");
+const router = express.Router();
+
+// Defining the router param with its value
+router.param("userId", (req, res, next, id) => {
+   console.log("I am called first");
+   next();
+});
+
+router.get("/user/:userId", (req, res) => {
+   console.log("I am called next");
+   res.end();
+});
+
+// Export router as a module
+module.exports = router;
+
+*/
+
+//////router.param() Method Demo Example
+
+// // // // Importing the route module
+// const userRoutes = require("./routes2.js");
+
+// // // Defining the route
+// app.use("/", userRoutes);
+
+// app.listen(3000, ()=>{console.log("Server listening on PORT 3000");});
+
+/**
+ * run index.js
+ * Hit the following Endpoint with a GET request −
+
+     http://localhost:3000/user/21
+     see the output under terminal   
+ */
+
+////-------------------------------------------------------------------------------------------
+
+
+// const express = require('express');
+// const app = express();
+// const PORT = 3000;
+
+// app.put('/', (req, res) => {
+// 	res.send("PUT Request Called")
+// })
+
+// app.listen(PORT, function (err) {
+// 	if (err) console.log(err);
+// 	console.log("Server listening on PORT", PORT);
+// });
+
+// console.log("http://127.0.0.1:3000/");
+// // // server.js
+
+////-------------------------------------------------------------------------------------------
+
+// // const express = require('express');
+// // const app = express();
+// // const PORT = 3000;
+
+// // app.use(express.json());
+
+// // // Sample data (replace this with a database in a real-world scenario)
+// // let books = [
+// //     { id: 1, title: 'Introduction to Express', author: 'John Doe' },
+// //     { id: 2, title: 'Node.js Basics', author: 'Jane Smith' },
+// // ];
+
+// // // GET method to retrieve all books
+// // // http://127.0.0.1:3000/books
+// // app.get('/books', (req, res) => {
+// //     res.json(books);
+// // });
+
+// // // // POST method to add a new book
+// // // app.post('/books', (req, res) => {
+// // //     const newBook = req.body;
+// // //     books.push(newBook);
+// // //     res.status(201).json(newBook);
+// // // });
+
+// // // DELETE method to remove a book by ID
+// // app.delete('/books/:id', (req, res) => {
+// //     const bookId = parseInt(req.params.id);
+// //     const index = books.findIndex(book => book.id == bookId);
+
+// //     if (index !== -1) {
+// //         const deletedBook = books.splice(index, 1)[0];
+// //         res.json({ message: 'Book deleted successfully', deletedBook });
+// //     } else {
+// //         res.status(404).json({ message: 'Book not found' });
+// //     }
+// // });
+
+// // app.listen(PORT, () => {
+// //     console.log(`Server is running on http://localhost:${PORT}`);
+// // });

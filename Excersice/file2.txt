@@ -1,0 +1,15 @@
+// /* Reading JSON files
+// JSON files, great for structured data storage, can be easily converted into JavaScript objects,
+// The fs.readFile() function is used here to read 'data.json'. In the callback, if no errors are encountered, 
+// the file content is parsed using JSON.parse() to transform it into a JavaScript object. The resultant object (jsonData) 
+// is then logged to the console. 
+// */
+
+// fs.readFile('data.json', 'utf8', (err, data) => {
+//   if (err) {
+//     console.error(err);
+//     return;
+//   }
+//   const jsonData = JSON.parse(data);
+//   console.log('JSON content:', jsonData);
+// });
